@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="競艇・ボートレース関連のYouTubeチャンネル100件を検索・分類できるデータベース。公式、予想、ライブ、情報チャンネルを掲載。">
+  <meta name="theme-color" content="#07111f">
+  <title>競艇 YouTube チャンネル DB</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #07111f;
+      --panel: #0e1a2b;
+      --panel-2: #132238;
+      --line: rgba(255, 255, 255, .09);
+      --text: #f4f7fb;
+      --muted: #91a0b5;
+      --cyan: #38d9c5;
+      --cyan-dark: #102f37;
+      --yellow: #ffd451;
+      --red: #ff615f;
+      --blue: #5f8dff;
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      background:
+        radial-gradient(circle at 85% 5%, rgba(56, 217, 197, .12), transparent 28rem),
+        linear-gradient(180deg, #091525 0, var(--bg) 34rem);
+      color: var(--text);
+      font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", system-ui, sans-serif;
+      line-height: 1.6;
+    }
+
+    button, input, select { font: inherit; }
+    button, select { cursor: pointer; }
+    a { color: inherit; }
+
+    .shell {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 76px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: .04em;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 38px;
+      height: 38px;
+      place-items: center;
+      border: 1px solid rgba(56, 217, 197, .45);
+      border-radius: 12px;
+      background: rgba(56, 217, 197, .1);
+      color: var(--cyan);
+      font-size: 14px;
+    }
+
+    .top-meta {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(300px, .7fr);
+      gap: 44px;
+      align-items: end;
+      padding: 76px 0 56px;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 18px;
+      color: var(--cyan);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 28px;
+      height: 2px;
+      background: currentColor;
+      content: "";
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 0;
+      font-size: clamp(40px, 7vw, 82px);
+      line-height: .98;
+      letter-spacing: -.055em;
+    }
+
+    h1 span {
+      display: block;
+      margin-top: 12px;
+      color: var(--cyan);
+      font-size: .58em;
+      letter-spacing: -.025em;
+    }
+
+    .intro {
+      max-width: 660px;
+      margin: 28px 0 0;
+      color: #b8c4d4;
+      font-size: 16px;
+    }
+
+    .hero-panel {
+      position: relative;
+      overflow: hidden;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, rgba(19, 34, 56, .96), rgba(10, 23, 39, .96));
+      box-shadow: 0 24px 70px rgba(0, 0, 0, .24);
+    }
+
+    .hero-panel::after {
+      position: absolute;
+      right: -40px;
+      bottom: -58px;
+      width: 180px;
+      height: 180px;
+      border: 28px solid rgba(56, 217, 197, .06);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .stat-main {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .stat-main strong {
+      color: var(--cyan);
+      font-family: Arial, sans-serif;
+      font-size: 64px;
+      line-height: 1;
+    }
+
+    .stat-main span { color: var(--muted); }
+
+    .mini-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .mini-stat strong {
+      display: block;
+      font-family: Arial, sans-serif;
+      font-size: 24px;
+    }
+
+    .mini-stat span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .directory {
+      padding: 0 0 90px;
+    }
+
+    .controls {
+      position: sticky;
+      z-index: 10;
+      top: 12px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(12, 25, 42, .88);
+      box-shadow: 0 16px 50px rgba(0, 0, 0, .2);
+      backdrop-filter: blur(18px);
+    }
+
+    .control-row {
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) auto;
+      gap: 12px;
+    }
+
+    .search-wrap { position: relative; }
+
+    .search-wrap svg {
+      position: absolute;
+      top: 50%;
+      left: 16px;
+      width: 20px;
+      color: var(--muted);
+      transform: translateY(-50%);
+    }
+
+    .search {
+      width: 100%;
+      height: 50px;
+      padding: 0 16px 0 48px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      outline: 0;
+      background: rgba(5, 14, 26, .68);
+      color: var(--text);
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    .search:focus {
+      border-color: rgba(56, 217, 197, .6);
+      box-shadow: 0 0 0 4px rgba(56, 217, 197, .09);
+    }
+
+    .sort {
+      height: 50px;
+      padding: 0 38px 0 15px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: var(--panel) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='%2391a0b5' d='m1 1 5 5 5-5'/%3E%3C/svg%3E") no-repeat right 14px center;
+      color: var(--text);
+      appearance: none;
+    }
+
+    .filter-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-top: 13px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .filter-row::-webkit-scrollbar { display: none; }
+
+    .filter {
+      flex: 0 0 auto;
+      padding: 8px 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: transparent;
+      color: #bdc8d7;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .filter:hover { border-color: rgba(255, 255, 255, .22); }
+    .filter.active {
+      border-color: var(--cyan);
+      background: var(--cyan);
+      color: #03201d;
+    }
+
+    .official-toggle {
+      display: flex;
+      flex: 0 0 auto;
+      align-items: center;
+      gap: 8px;
+      margin-left: auto;
+      padding-left: 16px;
+      color: var(--muted);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .official-toggle input {
+      width: 17px;
+      height: 17px;
+      accent-color: var(--cyan);
+    }
+
+    .results-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin: 34px 2px 18px;
+    }
+
+    .results-head h2 {
+      margin: 0;
+      font-size: 21px;
+      letter-spacing: -.02em;
+    }
+
+    .result-count {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      position: relative;
+      display: flex;
+      min-height: 238px;
+      flex-direction: column;
+      overflow: hidden;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: linear-gradient(145deg, rgba(17, 31, 51, .94), rgba(12, 24, 40, .94));
+      transition: transform .22s ease, border-color .22s ease, background .22s ease;
+    }
+
+    .card:hover {
+      border-color: rgba(56, 217, 197, .34);
+      background: linear-gradient(145deg, rgba(20, 39, 61, .98), rgba(12, 26, 43, .98));
+      transform: translateY(-3px);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .avatar {
+      display: grid;
+      width: 46px;
+      height: 46px;
+      flex: 0 0 auto;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 14px;
+      background: var(--avatar, #16304b);
+      color: white;
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .badge {
+      padding: 5px 9px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: #a9b7c8;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .badge.official {
+      border-color: rgba(56, 217, 197, .28);
+      background: var(--cyan-dark);
+      color: var(--cyan);
+    }
+
+    .card h3 {
+      min-height: 52px;
+      margin: 18px 0 8px;
+      font-size: 17px;
+      line-height: 1.5;
+      letter-spacing: -.015em;
+    }
+
+    .channel-id {
+      overflow: hidden;
+      margin: 0;
+      color: #73849a;
+      font-family: Consolas, monospace;
+      font-size: 11px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .card-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: auto;
+      padding-top: 20px;
+    }
+
+    .video-count {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .youtube-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .youtube-link::after {
+      color: var(--cyan);
+      content: "↗";
+      font-size: 16px;
+    }
+
+    .youtube-link:hover { color: var(--cyan); }
+
+    .empty {
+      display: none;
+      padding: 70px 20px;
+      border: 1px dashed var(--line);
+      border-radius: var(--radius);
+      color: var(--muted);
+      text-align: center;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 28px 0 42px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .race-lines {
+      display: flex;
+      gap: 5px;
+    }
+
+    .race-lines i {
+      width: 18px;
+      height: 4px;
+      border-radius: 99px;
+    }
+
+    .race-lines i:nth-child(1) { background: #fff; }
+    .race-lines i:nth-child(2) { background: #444; }
+    .race-lines i:nth-child(3) { background: #f05252; }
+    .race-lines i:nth-child(4) { background: #4980e8; }
+    .race-lines i:nth-child(5) { background: #f1d84c; }
+    .race-lines i:nth-child(6) { background: #52b878; }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-panel { max-width: 560px; }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 620px) {
+      .shell { width: min(100% - 24px, 1180px); }
+      .topbar { min-height: 64px; }
+      .brand { font-size: 14px; }
+      .top-meta { display: none; }
+      .hero { gap: 32px; padding: 54px 0 40px; }
+      h1 { font-size: clamp(39px, 14vw, 58px); }
+      .intro { font-size: 14px; }
+      .control-row { grid-template-columns: 1fr; }
+      .sort { width: 100%; }
+      .official-toggle { margin-left: 8px; padding-left: 8px; }
+      .grid { grid-template-columns: 1fr; }
+      .card { min-height: 220px; }
+      footer { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .card { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="shell topbar">
+    <div class="brand">
+      <span class="brand-mark">BR</span>
+      <span>競艇 CHANNEL DB</span>
+    </div>
+    <div class="top-meta">Database updated: 2026年06月07日</div>
+  </header>
+
+  <main>
+    <section class="shell hero">
+      <div>
+        <p class="eyebrow">Boat Race Channel Directory</p>
+        <h1>競艇を観る。<span>チャンネルから探す。</span></h1>
+        <p class="intro">
+          公式配信からレース予想、実戦バラエティまで。競艇・ボートレースを主題とする
+          YouTubeチャンネルを、検索しやすいデータベースにまとめました。
+        </p>
+      </div>
+      <aside class="hero-panel" aria-label="データベース統計">
+        <div class="stat-main">
+          <strong>100</strong>
+          <span>収録チャンネル</span>
+        </div>
+        <div class="mini-stats">
+          <div class="mini-stat"><strong>36</strong><span>公式チャンネル</span></div>
+          <div class="mini-stat"><strong>48</strong><span>予想・ライブ</span></div>
+          <div class="mini-stat"><strong>12</strong><span>実戦・バラエティ</span></div>
+          <div class="mini-stat"><strong>4</strong><span>情報・解説</span></div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="shell directory" aria-labelledby="directory-title">
+      <div class="controls">
+        <div class="control-row">
+          <label class="search-wrap">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="m21 21-4.35-4.35m2.35-5.15A7.5 7.5 0 1 1 4 11.5a7.5 7.5 0 0 1 15 0Z"/></svg>
+            <input id="search" class="search" type="search" placeholder="チャンネル名・カテゴリで検索" autocomplete="off">
+          </label>
+          <select id="sort" class="sort" aria-label="並び順">
+            <option value="name">名前順</option>
+            <option value="videos">関連動画数順</option>
+            <option value="official">公式優先</option>
+          </select>
+        </div>
+        <div class="filter-row" aria-label="カテゴリ">
+          <button class="filter active" type="button" data-category="すべて">すべて</button>
+          <button class="filter" type="button" data-category="公式">公式</button>
+          <button class="filter" type="button" data-category="予想・ライブ">予想・ライブ</button>
+          <button class="filter" type="button" data-category="実戦・バラエティ">実戦・バラエティ</button>
+          <button class="filter" type="button" data-category="情報・解説">情報・解説</button>
+          <label class="official-toggle">
+            <input id="official-only" type="checkbox">
+            公式のみ
+          </label>
+        </div>
+      </div>
+
+      <div class="results-head">
+        <h2 id="directory-title">チャンネル一覧</h2>
+        <span id="result-count" class="result-count"></span>
+      </div>
+      <div id="channel-grid" class="grid"></div>
+      <div id="empty" class="empty">条件に一致するチャンネルがありません。</div>
+    </section>
+  </main>
+
+  <footer class="shell">
+    <div>
+      掲載情報はYouTube検索結果を基に作成。名称や公開状況は変更される場合があります。
+    </div>
+    <div class="race-lines" aria-hidden="true">
+      <i></i><i></i><i></i><i></i><i></i><i></i>
+    </div>
+  </footer>
+
+  <script>
+    const channels = [{"id":1,"name":"16ボートレース","url":"https://www.youtube.com/channel/UC1CatAK8SuJNEgdnG5rcr0A","channelId":"UC1CatAK8SuJNEgdnG5rcr0A","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":2},{"id":83,"name":"3着全次郎の競艇TUBE","url":"https://www.youtube.com/channel/UCINMtQLlW2DwCy5N3wdHkqg","channelId":"UCINMtQLlW2DwCy5N3wdHkqg","category":"実戦・バラエティ","official":false,"tags":["競艇","ボートレース","実戦・バラエティ"],"relatedVideos":2},{"id":2,"name":"AD ティラ田のボートレースch","url":"https://www.youtube.com/channel/UCxOJVObvNc8e_SXLv7w7Iow","channelId":"UCxOJVObvNc8e_SXLv7w7Iow","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":2},{"id":3,"name":"BOATERS l ボーターズ","url":"https://www.youtube.com/channel/UC4WCYBs0R6fABHwqnneUiEA","channelId":"UC4WCYBs0R6fABHwqnneUiEA","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":26},{"id":49,"name":"BOATRACEからつ","url":"https://www.youtube.com/channel/UCO6ycDxAk-5OHAiKc71gNSQ","channelId":"UCO6ycDxAk-5OHAiKc71gNSQ","category":"公式","official":true,"tags":["競艇","ボートレース","公式"],"relatedVideos":17},{"id":96,"name":"BOATRACEまるがめ（まるがめボート）","url":"https://www.youtube.com/channel/UC2CWDMG18mpBGXkI9KHdACQ","channelId":"UC2CWDMG18mpBGXkI9KHdACQ","category":"公式","official":true,"tags":["競艇","ボートレース","公式"],"relatedVideos":7},{"id":50,"name":"BOATRACE蒲郡","url":"https://www.youtube.com/channel/UCb0W4K_Uc-GEmVqgYR3BvFA","channelId":"UCb0W4K_Uc-GEmVqgYR3BvFA","category":"公式","official":true,"tags":["競艇","ボートレース","ライブ","公式"],"relatedVideos":14},{"id":4,"name":"Gimik 競艇放送(万舟予想)","url":"https://www.youtube.com/channel/UC-z6YdHRDfdinG-SYLmMmCA","channelId":"UC-z6YdHRDfdinG-SYLmMmCA","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":3},{"id":5,"name":"korn 【競艇予想するYouTuber】","url":"https://www.youtube.com/channel/UC5TDmYcsdoBE_WVcjPSvEQQ","channelId":"UC5TDmYcsdoBE_WVcjPSvEQQ","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":1},{"id":6,"name":"seki 確率統計攻略channel 宝くじ競艇","url":"https://www.youtube.com/channel/UCWuxG_ix0eHl-dkoG6hB_YA","channelId":"UCWuxG_ix0eHl-dkoG6hB_YA","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ","ライブ"],"relatedVideos":1},{"id":51,"name":"Tokyo Bay TV【ボートレース平和島公式】","url":"https://www.youtube.com/channel/UCGExstl4XKMun5eY9V0zlSg","channelId":"UCGExstl4XKMun5eY9V0zlSg","category":"公式","official":true,"tags":["競艇","ボートレース","公式"],"relatedVideos":2},{"id":52,"name":"「公式」ボートレース三国","url":"https://www.youtube.com/channel/UCu-yP6WJQ0zcx5nmWhxvJEg","channelId":"UCu-yP6WJQ0zcx5nmWhxvJEg","category":"公式","official":true,"tags":["競艇","ボートレース","公式"],"relatedVideos":5},{"id":53,"name":"「公式」ボートレース三国 さぶちゃん","url":"https://www.youtube.com/channel/UC-a_0HtejXx9i15HbllvZaA","channelId":"UC-a_0HtejXx9i15HbllvZaA","category":"公式","official":true,"tags":["競艇","ボートレース","公式"],"relatedVideos":2},{"id":84,"name":"【あしやんTV】 ボートレース芦屋 YouTube チャンネル","url":"https://www.youtube.com/channel/UC5BunThJ_eBJq5gz-DOaRLw","channelId":"UC5BunThJ_eBJq5gz-DOaRLw","category":"公式","official":true,"tags":["競艇","ボートレース","公式"],"relatedVideos":9},{"id":54,"name":"【ボートレース江戸川公式】七海・麻駆理のギア全開⭐️ガチ予想ch","url":"https://www.youtube.com/channel/UCWYr79SGFCHBVzIWj1QOwqA","channelId":"UCWYr79SGFCHBVzIWj1QOwqA","category":"公式","official":true,"tags":["競艇","ボートレース","公式"],"relatedVideos":1},{"id":55,"name":"【公式】ボートレース大村（メインch）","url":"https://www.youtube.com/channel/UCPLb9R1EIqxNBy8Qzcrz8Wg","channelId":"UCPLb9R1EIqxNBy8Qzcrz8Wg","category":"公式","official":true,"tags":["競艇","ボートレース","公式"],"relatedVideos":21},{"id":56,"name":"【公式】ボートレース大村（レースライブch）","url":"https://www.youtube.com/channel/UC1ZE5z-vuh0wLdAPSpvnZ9g","channelId":"UC1ZE5z-vuh0wLdAPSpvnZ9g","category":"公式","official":true,"tags":["競艇","ボートレース","ライブ","公式"],"relatedVideos":5},{"id":57,"name":"【公式】ボートレース芦屋 YouTubeチャンネル","url":"https://www.youtube.com/channel/UCeyQwUd3H1p-e4R50yJ6K7Q","channelId":"UCeyQwUd3H1p-e4R50yJ6K7Q","category":"公式","official":true,"tags":["競艇","ボートレース","公式"],"relatedVideos":2},{"id":7,"name":"【競艇ナレッジ】舟券攻略情報","url":"https://www.youtube.com/channel/UCvhtJ1-mjO4FICQy03dqmgg","channelId":"UCvhtJ1-mjO4FICQy03dqmgg","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":3},{"id":8,"name":"【競艇予想屋】競艇のタツヤ","url":"https://www.youtube.com/channel/UCjRX-UaYq4bvi2UQpCgH4tQ","channelId":"UCjRX-UaYq4bvi2UQpCgH4tQ","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":3},{"id":9,"name":"いちまるboat race","url":"https://www.youtube.com/channel/UCp_SE5p2U69EX3UMqQC8m6Q","channelId":"UCp_SE5p2U69EX3UMqQC8m6Q","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":4},{"id":10,"name":"ここまる【競艇初心者女子の挑戦】","url":"https://www.youtube.com/channel/UCULGh38RtDGKVjY6mVgDVlQ","channelId":"UCULGh38RtDGKVjY6mVgDVlQ","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":13},{"id":11,"name":"すももの競艇生配信(万舟予想)","url":"https://www.youtube.com/channel/UCIkeF8nbTpmJroLdxBNcngw","channelId":"UCIkeF8nbTpmJroLdxBNcngw","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":1},{"id":12,"name":"すんすん-今日も今日とて競艇-","url":"https://www.youtube.com/channel/UCOOX8Bk_jaswEBOf6pMunZw","channelId":"UCOOX8Bk_jaswEBOf6pMunZw","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":3},{"id":85,"name":"なんかきになる競艇","url":"https://www.youtube.com/channel/UCwmLD7eVTYy-8DyFNzLVQ4Q","channelId":"UCwmLD7eVTYy-8DyFNzLVQ4Q","category":"実戦・バラエティ","official":false,"tags":["競艇","ボートレース","実戦・バラエティ"],"relatedVideos":1},{"id":86,"name":"へたくそボートレースちゃんねる","url":"https://www.youtube.com/channel/UCPURq4rf7HY-yYXR-uoQLZw","channelId":"UCPURq4rf7HY-yYXR-uoQLZw","category":"実戦・バラエティ","official":false,"tags":["競艇","ボートレース","実戦・バラエティ"],"relatedVideos":1},{"id":13,"name":"みんなの舟券","url":"https://www.youtube.com/channel/UCjXKCN0ToTQ_mWxndg0AT2A","channelId":"UCjXKCN0ToTQ_mWxndg0AT2A","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":16},{"id":14,"name":"ゴリのEZボートレース","url":"https://www.youtube.com/channel/UCS46m3QOMSMDJYar9sN-1-w","channelId":"UCS46m3QOMSMDJYar9sN-1-w","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":1},{"id":15,"name":"スコット競艇チャンネル","url":"https://www.youtube.com/channel/UCk1WDhmoUADNKhJ3G_f6R3Q","channelId":"UCk1WDhmoUADNKhJ3G_f6R3Q","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":1},{"id":97,"name":"スマイルのボートレース情報局","url":"https://www.youtube.com/channel/UCjU0NHhss8-gz3r1XIDuYfw","channelId":"UCjU0NHhss8-gz3r1XIDuYfw","category":"情報・解説","official":false,"tags":["競艇","ボートレース","情報・解説"],"relatedVideos":2},{"id":87,"name":"タロの旅打ちボートレース、時々MLB","url":"https://www.youtube.com/channel/UCJThN9rNIMyXj02qygS-F2A","channelId":"UCJThN9rNIMyXj02qygS-F2A","category":"実戦・バラエティ","official":false,"tags":["競艇","ボートレース","実戦・バラエティ"],"relatedVideos":1},{"id":88,"name":"トップ・トレンドの競艇女子社員ブログ「女の気持ち」","url":"https://www.youtube.com/channel/UCr0R_LP6efr_3z3QPdZhgWQ","channelId":"UCr0R_LP6efr_3z3QPdZhgWQ","category":"実戦・バラエティ","official":false,"tags":["競艇","ボートレース","実戦・バラエティ"],"relatedVideos":1},{"id":89,"name":"ハワイ競艇チャンネル","url":"https://www.youtube.com/channel/UCd-SmOeGqRXSxjQ4Rf7wU3A","channelId":"UCd-SmOeGqRXSxjQ4Rf7wU3A","category":"実戦・バラエティ","official":false,"tags":["競艇","ボートレース","実戦・バラエティ"],"relatedVideos":1},{"id":16,"name":"ボーたろうのボートレース予想ライブちゃんねる","url":"https://www.youtube.com/channel/UCTXInQ2Yv3ZAErTz1Jkx3xQ","channelId":"UCTXInQ2Yv3ZAErTz1Jkx3xQ","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ","ライブ"],"relatedVideos":2},{"id":17,"name":"ボートピア内山","url":"https://www.youtube.com/channel/UC92Yy8GsfDtdfDpIk3U-Ong","channelId":"UC92Yy8GsfDtdfDpIk3U-Ong","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":2},{"id":18,"name":"ボートレースおうち予想チャンネル","url":"https://www.youtube.com/channel/UClKmzQhwaFFM_7PnkUl1hKA","channelId":"UClKmzQhwaFFM_7PnkUl1hKA","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":3},{"id":98,"name":"ボートレースしんでる","url":"https://www.youtube.com/channel/UCAsAggR0pT06Ov1yXSwQdFQ","channelId":"UCAsAggR0pT06Ov1yXSwQdFQ","category":"情報・解説","official":false,"tags":["競艇","ボートレース","情報・解説"],"relatedVideos":1},{"id":19,"name":"ボートレースすず","url":"https://www.youtube.com/channel/UCP_yqOr6UVs813oDhZdTv4g","channelId":"UCP_yqOr6UVs813oDhZdTv4g","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":1},{"id":58,"name":"ボートレースとこなめ公式チャンネル","url":"https://www.youtube.com/channel/UCu9lPbAk1MosTGm2yQ4BapQ","channelId":"UCu9lPbAk1MosTGm2yQ4BapQ","category":"公式","official":true,"tags":["競艇","ボートレース","ライブ","公式"],"relatedVideos":12},{"id":59,"name":"ボートレースなると公式ちゃんねる","url":"https://www.youtube.com/channel/UCd8rJfg7p8qsASOEIIwAinQ","channelId":"UCd8rJfg7p8qsASOEIIwAinQ","category":"公式","official":true,"tags":["競艇","ボートレース","公式"],"relatedVideos":2},{"id":60,"name":"ボートレースびわこ【公式サブチャンネル】","url":"https://www.youtube.com/channel/UC30RhFtmxLH1Hivcwr0qQoA","channelId":"UC30RhFtmxLH1Hivcwr0qQoA","category":"公式","official":true,"tags":["競艇","ボートレース","公式"],"relatedVideos":1},{"id":61,"name":"ボートレースびわこ【公式メインチャンネル】","url":"https://www.youtube.com/channel/UCLbcsJqsT5Qa1axpYcOBpmg","channelId":"UCLbcsJqsT5Qa1axpYcOBpmg","category":"公式","official":true,"tags":["競艇","ボートレース","ライブ","公式"],"relatedVideos":9},{"id":20,"name":"ボートレースライフ","url":"https://www.youtube.com/channel/UCwM0Ls4uPkRsbwqINBX2lgg","channelId":"UCwM0Ls4uPkRsbwqINBX2lgg","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":1},{"id":21,"name":"ボートレースラジオTV","url":"https://www.youtube.com/channel/UCyQSWbooNzTE-xXk4bhmrZw","channelId":"UCyQSWbooNzTE-xXk4bhmrZw","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":9},{"id":22,"name":"ボートレースレイドのミナト","url":"https://www.youtube.com/channel/UCwTOU3tbVhBVuYwdSojt1QQ","channelId":"UCwTOU3tbVhBVuYwdSojt1QQ","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":97},{"id":62,"name":"ボートレース下関公式チャンネル","url":"https://www.youtube.com/channel/UCl-7IwVjJHzWUhqxz7hwY1w","channelId":"UCl-7IwVjJHzWUhqxz7hwY1w","category":"公式","official":true,"tags":["競艇","ボートレース","公式"],"relatedVideos":30},{"id":63,"name":"ボートレース下関公式チャンネル(レースLIVE)","url":"https://www.youtube.com/channel/UC4i1Cz4pFYe8LI1pAFbC5kQ","channelId":"UC4i1Cz4pFYe8LI1pAFbC5kQ","category":"公式","official":true,"tags":["競艇","ボートレース","公式"],"relatedVideos":5},{"id":64,"name":"ボートレース住之江公式チャンネル","url":"https://www.youtube.com/channel/UCW3AReETO-oDmEoE-m3i7dQ","channelId":"UCW3AReETO-oDmEoE-m3i7dQ","category":"公式","official":true,"tags":["競艇","ボートレース","公式"],"relatedVideos":5},{"id":65,"name":"ボートレース公式 BOATRACE official","url":"https://www.youtube.com/channel/UC4zGMicoES8FZwkhiXXZThg","channelId":"UC4zGMicoES8FZwkhiXXZThg","category":"公式","official":true,"tags":["競艇","ボートレース","公式"],"relatedVideos":69},{"id":66,"name":"ボートレース公式映像配信 JLCレジャーチャンネル","url":"https://www.youtube.com/channel/UC35TRecEk9N5FAj2a--PAkg","channelId":"UC35TRecEk9N5FAj2a--PAkg","category":"公式","official":true,"tags":["競艇","ボートレース","ライブ","公式"],"relatedVideos":94},{"id":67,"name":"ボートレース多摩川【公式】","url":"https://www.youtube.com/channel/UC4lvZQUptR8m5VDSu49xCGQ","channelId":"UC4lvZQUptR8m5VDSu49xCGQ","category":"公式","official":true,"tags":["競艇","ボートレース","公式"],"relatedVideos":5},{"id":68,"name":"ボートレース宮島チャンネル【公式】","url":"https://www.youtube.com/channel/UCxvYC6PPCsy2_p0tGuvIv5w","channelId":"UCxvYC6PPCsy2_p0tGuvIv5w","category":"公式","official":true,"tags":["競艇","ボートレース","公式"],"relatedVideos":12},{"id":69,"name":"ボートレース尼崎【公式】","url":"https://www.youtube.com/channel/UC-vpH4QQKPwsqsbESOfNgZQ","channelId":"UC-vpH4QQKPwsqsbESOfNgZQ","category":"公式","official":true,"tags":["競艇","ボートレース","公式"],"relatedVideos":10},{"id":70,"name":"ボートレース平和島劇場 P-Studio","url":"https://www.youtube.com/channel/UCZN9F6EDzbwqlAqeJbwH6gA","channelId":"UCZN9F6EDzbwqlAqeJbwH6gA","category":"公式","official":true,"tags":["競艇","ボートレース","ライブ","公式"],"relatedVideos":1},{"id":71,"name":"ボートレース徳山","url":"https://www.youtube.com/channel/UCqyq1Dav7D5ztEl_ierxsjw","channelId":"UCqyq1Dav7D5ztEl_ierxsjw","category":"公式","official":true,"tags":["競艇","ボートレース","公式"],"relatedVideos":11},{"id":72,"name":"ボートレース戸田","url":"https://www.youtube.com/channel/UCoLCf3aVRMSukwetHfn1p1A","channelId":"UCoLCf3aVRMSukwetHfn1p1A","category":"公式","official":true,"tags":["競艇","ボートレース","公式"],"relatedVideos":6},{"id":23,"name":"ボートレース投資学校【競艇をギャンブルから投資に!】","url":"https://www.youtube.com/channel/UC-4D5IawvOSuG-oCCSTlPUA","channelId":"UC-4D5IawvOSuG-oCCSTlPUA","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":9},{"id":73,"name":"ボートレース桐生（公式）","url":"https://www.youtube.com/channel/UCT2pRt_me0tOA8B2sakEv7Q","channelId":"UCT2pRt_me0tOA8B2sakEv7Q","category":"公式","official":true,"tags":["競艇","ボートレース","ライブ","公式"],"relatedVideos":20},{"id":74,"name":"ボートレース江戸川公式チャンネル ういちの江戸川ナイスぅ〜っ!","url":"https://www.youtube.com/channel/UCpNAwETM_vPV2Skumzc_KMA","channelId":"UCpNAwETM_vPV2Skumzc_KMA","category":"公式","official":true,"tags":["競艇","ボートレース","公式"],"relatedVideos":13},{"id":75,"name":"ボートレース津ぅ公式チャンネル","url":"https://www.youtube.com/channel/UCEUXzh5FRxDneaLvv0YdEfQ","channelId":"UCEUXzh5FRxDneaLvv0YdEfQ","category":"公式","official":true,"tags":["競艇","ボートレース","公式"],"relatedVideos":1},{"id":76,"name":"ボートレース浜名湖【公式】","url":"https://www.youtube.com/channel/UCGZig6i5JrZ33jjW2GG6Bzw","channelId":"UCGZig6i5JrZ33jjW2GG6Bzw","category":"公式","official":true,"tags":["競艇","ボートレース","公式"],"relatedVideos":14},{"id":77,"name":"ボートレース福岡","url":"https://www.youtube.com/channel/UCgyb8el3rLkg8i0bEMboQhA","channelId":"UCgyb8el3rLkg8i0bEMboQhA","category":"公式","official":true,"tags":["競艇","ボートレース","公式"],"relatedVideos":1},{"id":78,"name":"ボートレース若松公式チャンネル","url":"https://www.youtube.com/channel/UCll--OtE3eJpzb4uwX8MX9A","channelId":"UCll--OtE3eJpzb4uwX8MX9A","category":"公式","official":true,"tags":["競艇","ボートレース","公式"],"relatedVideos":12},{"id":79,"name":"ボートレース蒲郡公式YouTubeチャンネル","url":"https://www.youtube.com/channel/UCZhuyNQgLORLjgl8hlA7uHw","channelId":"UCZhuyNQgLORLjgl8hlA7uHw","category":"公式","official":true,"tags":["競艇","ボートレース","公式"],"relatedVideos":14},{"id":24,"name":"ユカイ店長【ボートレース】","url":"https://www.youtube.com/channel/UCvtLNVYQm0Ziu_jS1oFBTAw","channelId":"UCvtLNVYQm0Ziu_jS1oFBTAw","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":16},{"id":25,"name":"ラボ@ボートレース","url":"https://www.youtube.com/channel/UCHoD-W_CrM9P1wiaQPupd8A","channelId":"UCHoD-W_CrM9P1wiaQPupd8A","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":3},{"id":90,"name":"レッドとブルーのボートレースLIFE","url":"https://www.youtube.com/channel/UCL-KvbvleFc7vvQsOWZNyDw","channelId":"UCL-KvbvleFc7vvQsOWZNyDw","category":"実戦・バラエティ","official":false,"tags":["競艇","ボートレース","実戦・バラエティ"],"relatedVideos":1},{"id":80,"name":"レースライブ【公式】ボートレース浜名湖","url":"https://www.youtube.com/channel/UC216-Ja4Zf0bZliGZKlK1EA","channelId":"UC216-Ja4Zf0bZliGZKlK1EA","category":"公式","official":true,"tags":["競艇","ボートレース","ライブ","公式"],"relatedVideos":3},{"id":26,"name":"一日一舟券","url":"https://www.youtube.com/channel/UC_pPxIbWTutEDgUc3AZQ6Xw","channelId":"UC_pPxIbWTutEDgUc3AZQ6Xw","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":1},{"id":27,"name":"万太郎のボートレースレポート","url":"https://www.youtube.com/channel/UCovRD5T216WsKWOaYvT1N5Q","channelId":"UCovRD5T216WsKWOaYvT1N5Q","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":1},{"id":28,"name":"万舟事変","url":"https://www.youtube.com/channel/UCJHqbnwrt23zrprCzxLfCyg","channelId":"UCJHqbnwrt23zrprCzxLfCyg","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":2},{"id":29,"name":"万舟侍の競艇極意チャンネル【匠の予想】","url":"https://www.youtube.com/channel/UCJXuiodkW0zqJSBWbrfJ1rw","channelId":"UCJXuiodkW0zqJSBWbrfJ1rw","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":8},{"id":30,"name":"万舟通【競艇あと出し考察】","url":"https://www.youtube.com/channel/UCZI4fZ-QMvviYEv-jgkn_cA","channelId":"UCZI4fZ-QMvviYEv-jgkn_cA","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":1},{"id":31,"name":"主任のボートレース","url":"https://www.youtube.com/channel/UCTrgLvbZ_gqkKQOcqKdfchw","channelId":"UCTrgLvbZ_gqkKQOcqKdfchw","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":9},{"id":32,"name":"全全TV【ボートレース】","url":"https://www.youtube.com/channel/UCUF9wIagQXkVcL8vVPxHF4A","channelId":"UCUF9wIagQXkVcL8vVPxHF4A","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":1},{"id":91,"name":"寝ても覚めてもボートレース","url":"https://www.youtube.com/channel/UCrSZ_K-nsCshpzfFRMhD7jw","channelId":"UCrSZ_K-nsCshpzfFRMhD7jw","category":"実戦・バラエティ","official":false,"tags":["競艇","ボートレース","ライブ","実戦・バラエティ"],"relatedVideos":1},{"id":33,"name":"毎日競艇ナビちゃんねる","url":"https://www.youtube.com/channel/UC1z_bUCtBDBTkxM3ITcnPkg","channelId":"UC1z_bUCtBDBTkxM3ITcnPkg","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":2},{"id":34,"name":"沖世の舟勝負絵巻【ボートレース】","url":"https://www.youtube.com/channel/UCFzxOu99C4sUB-QsmMy8nfA","channelId":"UCFzxOu99C4sUB-QsmMy8nfA","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":1},{"id":35,"name":"生粋の競艇小僧ぽこちゃんネル","url":"https://www.youtube.com/channel/UC-kkmCKuFsTFIzCf4xzQExw","channelId":"UC-kkmCKuFsTFIzCf4xzQExw","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":1},{"id":36,"name":"競艇DATA","url":"https://www.youtube.com/channel/UC_qV8piuxbV_xrEG6I0ioeQ","channelId":"UC_qV8piuxbV_xrEG6I0ioeQ","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":2},{"id":92,"name":"競艇Dr.かとチャンネル","url":"https://www.youtube.com/channel/UCySgGxVNiGujdbxVPOkb76w","channelId":"UCySgGxVNiGujdbxVPOkb76w","category":"実戦・バラエティ","official":false,"tags":["競艇","ボートレース","実戦・バラエティ"],"relatedVideos":2},{"id":93,"name":"競艇☆初心者 わかば　BoatRookie Wakaba","url":"https://www.youtube.com/channel/UCSD45hiWqmUzdjtGP917vGQ","channelId":"UCSD45hiWqmUzdjtGP917vGQ","category":"実戦・バラエティ","official":false,"tags":["競艇","ボートレース","実戦・バラエティ"],"relatedVideos":2},{"id":81,"name":"競艇アドバイザー公式 -ボートレースのトリセツ-","url":"https://www.youtube.com/channel/UC37s8ZlBkurm5e4OF9O72qw","channelId":"UC37s8ZlBkurm5e4OF9O72qw","category":"公式","official":true,"tags":["競艇","ボートレース","公式"],"relatedVideos":1},{"id":37,"name":"競艇アドバイザー清水","url":"https://www.youtube.com/channel/UC-hl22i3m5AwczxiZGG0kpw","channelId":"UC-hl22i3m5AwczxiZGG0kpw","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":5},{"id":38,"name":"競艇カメラマンch","url":"https://www.youtube.com/channel/UCvy_6MDAQAznUleiCNh79zQ","channelId":"UCvy_6MDAQAznUleiCNh79zQ","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":1},{"id":99,"name":"競艇ケンちゃんねる","url":"https://www.youtube.com/channel/UCHnwuDigGfz-h16IXpx8JDg","channelId":"UCHnwuDigGfz-h16IXpx8JDg","category":"情報・解説","official":false,"tags":["競艇","ボートレース","情報・解説"],"relatedVideos":1},{"id":39,"name":"競艇マガジン（競艇ライブ配信部屋）","url":"https://www.youtube.com/channel/UCV3Sz51pBQLWpmx2Ks8v3LA","channelId":"UCV3Sz51pBQLWpmx2Ks8v3LA","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":2},{"id":40,"name":"競艇マーブル","url":"https://www.youtube.com/channel/UCnh9M7N3IAQI0_ebJQwKvCg","channelId":"UCnh9M7N3IAQI0_ebJQwKvCg","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":1},{"id":41,"name":"競艇モンチッチ","url":"https://www.youtube.com/channel/UCQA4tFfmwumprt2QisYUbXw","channelId":"UCQA4tFfmwumprt2QisYUbXw","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":1},{"id":42,"name":"競艇予想家ふなちゃん","url":"https://www.youtube.com/channel/UCgY4ZKpSmmpZ4ncBJTmu2aw","channelId":"UCgY4ZKpSmmpZ4ncBJTmu2aw","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":4},{"id":100,"name":"競艇初心者が稼げるようになる最短の道","url":"https://www.youtube.com/channel/UCMGeM8Mm5Byo_KppztseNqA","channelId":"UCMGeM8Mm5Byo_KppztseNqA","category":"情報・解説","official":false,"tags":["競艇","ボートレース","情報・解説"],"relatedVideos":2},{"id":94,"name":"競艇戦隊 逆襲のブルー","url":"https://www.youtube.com/channel/UCwOvq1gZo0bjJ94IjrLbBng","channelId":"UCwOvq1gZo0bjJ94IjrLbBng","category":"実戦・バラエティ","official":false,"tags":["競艇","ボートレース","実戦・バラエティ"],"relatedVideos":1},{"id":43,"name":"舟万競艇チャンネル","url":"https://www.youtube.com/channel/UCYYdcTOsnxcCcPJQUESPEfw","channelId":"UCYYdcTOsnxcCcPJQUESPEfw","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":4},{"id":44,"name":"舟券AI_ YOSHIKO_ver.3","url":"https://www.youtube.com/channel/UChwgoitHhyml8u9bF1I1B1g","channelId":"UChwgoitHhyml8u9bF1I1B1g","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":2},{"id":45,"name":"舟券よ当たってくれ","url":"https://www.youtube.com/channel/UCfoTBKnQkL7HhYct8qO9r-Q","channelId":"UCfoTBKnQkL7HhYct8qO9r-Q","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":2},{"id":46,"name":"舟券クラフト","url":"https://www.youtube.com/channel/UCtgSfRsRcKueQ_39K5lEB5A","channelId":"UCtgSfRsRcKueQ_39K5lEB5A","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":2},{"id":82,"name":"蒼月まるる【BOAT RACEまるがめ公式】","url":"https://www.youtube.com/channel/UC-1cPaa0Wbs9WhlQJpzChEQ","channelId":"UC-1cPaa0Wbs9WhlQJpzChEQ","category":"公式","official":true,"tags":["競艇","ボートレース","公式"],"relatedVideos":5},{"id":47,"name":"超抜モンキー【ボートレース】","url":"https://www.youtube.com/channel/UC2pxKvTUBYCJwzGC7Dil33g","channelId":"UC2pxKvTUBYCJwzGC7Dil33g","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":11},{"id":95,"name":"通りすがりの配信者/BOATRACE","url":"https://www.youtube.com/channel/UCSsje1KhpgMKXflVHHEwv6w","channelId":"UCSsje1KhpgMKXflVHHEwv6w","category":"実戦・バラエティ","official":false,"tags":["競艇","ボートレース","実戦・バラエティ"],"relatedVideos":2},{"id":48,"name":"限界くんの舟券迷走記","url":"https://www.youtube.com/channel/UCmTY03rEYvh0yCzCQvArAWg","channelId":"UCmTY03rEYvh0yCzCQvArAWg","category":"予想・ライブ","official":false,"tags":["競艇","ボートレース","予想・ライブ"],"relatedVideos":2}];
+    const colors = ["#173454", "#23375b", "#4a2938", "#174b49", "#4b3b1c", "#34304f"];
+    const search = document.querySelector("#search");
+    const sort = document.querySelector("#sort");
+    const officialOnly = document.querySelector("#official-only");
+    const filters = [...document.querySelectorAll(".filter")];
+    const grid = document.querySelector("#channel-grid");
+    const empty = document.querySelector("#empty");
+    const resultCount = document.querySelector("#result-count");
+    let activeCategory = "すべて";
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, char => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      })[char]);
+    }
+
+    function initials(name) {
+      const clean = name.replace(/[【】「」（）()[\]]/g, " ").trim();
+      const words = clean.split(/\s+/).filter(Boolean);
+      if (words.length > 1 && /^[A-Za-z0-9]/.test(words[0])) {
+        return words.slice(0, 2).map(word => word[0]).join("").toUpperCase();
+      }
+      return [...clean].slice(0, 2).join("");
+    }
+
+    function colorFor(value) {
+      let hash = 0;
+      for (const char of value) hash = ((hash << 5) - hash + char.codePointAt(0)) | 0;
+      return colors[Math.abs(hash) % colors.length];
+    }
+
+    function card(channel) {
+      const badgeClass = channel.official ? "badge official" : "badge";
+      const badgeText = channel.official ? "公式" : channel.category;
+      const videoText = channel.relatedVideos
+        ? `検索関連動画 ${channel.relatedVideos}件`
+        : channel.category;
+      return `
+        <article class="card">
+          <div class="card-top">
+            <div class="avatar" style="--avatar:${colorFor(channel.channelId)}">${escapeHtml(initials(channel.name))}</div>
+            <span class="${badgeClass}">${escapeHtml(badgeText)}</span>
+          </div>
+          <h3>${escapeHtml(channel.name)}</h3>
+          <p class="channel-id">${escapeHtml(channel.channelId)}</p>
+          <div class="card-bottom">
+            <span class="video-count">${escapeHtml(videoText)}</span>
+            <a class="youtube-link" href="${escapeHtml(channel.url)}" target="_blank" rel="noopener noreferrer">YouTube</a>
+          </div>
+        </article>`;
+    }
+
+    function render() {
+      const query = search.value.trim().toLocaleLowerCase("ja");
+      let visible = channels.filter(channel => {
+        const categoryMatch = activeCategory === "すべて" || channel.category === activeCategory;
+        const officialMatch = !officialOnly.checked || channel.official;
+        const haystack = [channel.name, channel.category, ...channel.tags].join(" ").toLocaleLowerCase("ja");
+        return categoryMatch && officialMatch && (!query || haystack.includes(query));
+      });
+
+      if (sort.value === "videos") {
+        visible.sort((a, b) => b.relatedVideos - a.relatedVideos || a.name.localeCompare(b.name, "ja"));
+      } else if (sort.value === "official") {
+        visible.sort((a, b) => Number(b.official) - Number(a.official) || a.name.localeCompare(b.name, "ja"));
+      } else {
+        visible.sort((a, b) => a.name.localeCompare(b.name, "ja"));
+      }
+
+      grid.innerHTML = visible.map(card).join("");
+      resultCount.textContent = `${visible.length} / ${channels.length} チャンネル`;
+      grid.hidden = visible.length === 0;
+      empty.style.display = visible.length === 0 ? "block" : "none";
+    }
+
+    filters.forEach(button => {
+      button.addEventListener("click", () => {
+        activeCategory = button.dataset.category;
+        filters.forEach(item => item.classList.toggle("active", item === button));
+        render();
+      });
+    });
+    search.addEventListener("input", render);
+    sort.addEventListener("change", render);
+    officialOnly.addEventListener("change", render);
+    render();
+  </script>
+</body>
+</html>
