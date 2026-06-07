@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kyoteidb.adult-bank.jp/sitemap.xml
